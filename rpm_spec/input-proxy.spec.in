@@ -10,8 +10,13 @@ URL:		https://www.qubes-os.org/
 
 BuildRequires:	gcc
 BuildRequires:	kernel-headers
+%if 0%{?suse_version} == 1500 && 0%{?is_opensuse}
+BuildRequires:	python3-setuptools
+BuildRequires:	python3-devel
+%else
 BuildRequires:	python%{python3_pkgversion}-setuptools
 BuildRequires:	python%{python3_pkgversion}-devel
+%endif
 
 Source0: %{name}-%{version}.tar.gz
 
@@ -23,7 +28,7 @@ This package is receiver part.
 %package sender
 Summary:    Simple input device proxy (sender)
 %{?systemd_requires}
-BuildRequires:  systemd
+BuildRequires:	systemd
 
 %description sender
 Simple input device proxy, which pass events from /dev/input/eventN device, to
